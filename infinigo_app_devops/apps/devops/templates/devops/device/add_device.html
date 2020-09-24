@@ -1,0 +1,45 @@
+{% extends "devops/base.html" %}
+{% block content %}
+    <div class="layui-container" >
+        <blockquote class="layui-elem-quote">
+            <h1>add device</h1>
+        </blockquote>
+
+        <div class="layui-row" >
+
+            <div class="layui-col-md5" >
+                <form action="/devops/add_device_commit/" method="POST" enctype="multipart/form-data"/>
+                    {% csrf_token %}
+                    <hr class="layui-bg-green">
+
+                    设备名称：<input type="text" name="name" id="name" placeholder="设备名称" class="layui-input"/>
+                    <hr class="layui-bg-green">
+
+                    局域网IP：<input type="text" name="local_ip" id="local_ip" placeholder="local_ip" class="layui-input"/>
+                    <hr class="layui-bg-green">
+
+                    公网IP：<input type="text" name="public_ip" id="public_ip" placeholder="public_ip" class="layui-input"/>
+                    <hr class="layui-bg-green">
+
+                    ssh端口：<input type="text" name="ssh_port" id="ssh_port" placeholder="ssh_port" class="layui-input"/>
+                    <hr class="layui-bg-green">
+
+                    ssh账号：<input type="text" name="user" id="user" placeholder="user" class="layui-input"/>
+                    <hr class="layui-bg-green">
+
+                    ssh密码：<input type="text" name="password" id="password" placeholder="password" class="layui-input"/>
+                    <hr class="layui-bg-green">
+
+                    设备照片：<input type="file" name="t_image" id="t_image"/>
+                    <hr class="layui-bg-green">
+
+                    设备管理员：<input type="text" name="leader" id="leader" placeholder="leader" class="layui-input"/>
+                    <hr class="layui-bg-green">
+
+                    <hr class="layui-bg-green">
+                    <input type="submit" value="添加" class="layui-btn"/>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

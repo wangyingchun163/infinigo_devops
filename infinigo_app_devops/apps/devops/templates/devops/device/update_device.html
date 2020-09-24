@@ -1,0 +1,45 @@
+{% extends "devops/base.html" %}
+{% block content %}
+    <div class="layui-container">
+        <div class="layui-row">
+        {%for device in data%}
+            <div class="layui-col-md5">
+                <form action="/devops/update_device/" method="post" enctype="multipart/form-data"/>
+                    {% csrf_token %}
+                    id<input type="text" name="id" id="id" placeholder="id" class="layui-input" value="{{ device.id}}" />
+                    <hr class="layui-bg-green">
+
+                    设备名称<input type="text" name="name" id="name" placeholder="name" class="layui-input" value="{{ device.name}}"/>
+                    <hr class="layui-bg-green">
+
+                    local_ip<input type="text" name="local_ip" id="local_ip" placeholder="local_ip" class="layui-input" value="{{ device.local_ip }}"/>
+                    <hr class="layui-bg-green">
+
+                    public_ip<input type="text" name="public_ip" id="public_ip" placeholder="public_ip" class="layui-input" value="{{ device.public_ip }}"/>
+                    <hr class="layui-bg-green">
+
+                    ssh_port<input type="text" name="ssh_port" id="ssh_port" placeholder="ssh_port" class="layui-input" value="{{ device.ssh_port }}"/>
+                    <hr class="layui-bg-green">
+
+                    user<input type="text" name="user" id="user" placeholder="user" class="layui-input" value="{{ device.user }}"/>
+                    <hr class="layui-bg-green">
+
+                    password<input type="text" name="password" id="password" placeholder="password" class="layui-input" value="{{ device.password }}"/>
+                    <hr class="layui-bg-green">
+
+                    图片<input type="file" name="t_image" id="t_image" placeholder="t_image" value="{{ device.t_image }}"/>
+                    <hr class="layui-bg-green">
+
+                    <img src="{{ device.t_image }}" height="50px">
+                    <hr class="layui-bg-green">
+
+                    管理员<input type="text" name="leader" id="leader" placeholder="leader" class="layui-input" value="{{ device.leader }}"/>
+                    <hr class="layui-bg-green">
+
+                    <input type="submit" value="修改" class="layui-btn"/>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

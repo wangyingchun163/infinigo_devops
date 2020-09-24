@@ -1,0 +1,38 @@
+{% extends "devops/base.html" %}
+{% block content %}
+    <div class="layui-container">
+        <div class="layui-row">
+        {%for domain1 in data%}
+            <div class="layui-col-md5">
+                <form action="/devops/update_domain/" method="post" enctype="multipart/form-data"/>
+                    {% csrf_token %}
+                    id<input type="text" name="id" id="id" placeholder="id" class="layui-input" value="{{ domain1.id}}" />
+                    <hr class="layui-bg-green">
+
+                    domain<input type="text" name="domain" id="domain" placeholder="domain" class="layui-input" value="{{ domain1.domain }}"/>
+                    <hr class="layui-bg-green">
+
+                    ip<input type="text" name="ip" id="ip" placeholder="ip" class="layui-input" value="{{ domain1.ip }}"/>
+                    <hr class="layui-bg-green">
+
+                    cname<input type="text" name="cname" id="cname" placeholder="cname" class="layui-input" value="{{ domain1.cname }}"/>
+                    <hr class="layui-bg-green">
+
+                    <!--
+                    业务管理员：<select name="leader"  id="leader" lay-verify="required"   onchange="" lay-search="" class="layui-select-none" style="height: 35px">
+                      <option value="">{{ leader_name.username }}</option>
+                        {%for leader in leader_all%}
+                            <tr>
+                                <option value={{leader.username}}>{{leader.username}}</option>
+                            </tr>
+                        {%endfor%}
+                    </select>
+                    <hr class="layui-bg-green">
+                    -->
+                    <input type="submit" value="修改" class="layui-btn"/>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

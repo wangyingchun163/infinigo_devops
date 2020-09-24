@@ -1,0 +1,53 @@
+{% extends "devops/base.html" %}
+{% block content %}
+    <div class="layui-container">
+        {# 查询业务模块 #}
+        <form action="/devops/search_business" method="get">
+            业务名称：<input type="text" style="width:200px; height:30px;" placeholder="business" name="business" id="business">
+            <input type="submit" class="layui-btn" value="搜索">
+        </form>
+
+        {# 显示所有业务模块 #}
+        <table class="layui-table">
+            <thead>
+              <tr>
+                  <th style="width:5%">id</th>
+                  <th style="width:10%">business</th>
+                  <th style="width:10%">project</th>
+                  <th style="width:10%">application</th>
+                  <th style="width:10%">leader</th>
+                  <th style="width:1%">修改</th>
+                  <th style="width:1%">删除</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for business in data%}
+                  <tr>
+                      <td  style="width:5%">{{business.id}}</td>
+                      <td  style="width:10%">{{business.business}}</td>
+                      <td  style="width:10%">{{business.project}}</td>
+                      <td  style="width:10%">{{business.application}}</td>
+                      <td  style="width:10%">{{business.leader}}</td>
+                      <td  style="width:1%">
+                          {# 修改业务模块 #}
+                          <a href="/devops/get_business/{{ business.id }}/" class="layui-btn layui-btn-normal">
+                              <i class="layui-icon">&#xe642;</i>修改
+                          </a>
+                      </td>
+                      <td  style="width:1%">
+                          {# 删除业务模块 #}
+                          <a href="/devops/delete_business/{{ business.id }}" class="layui-btn layui-btn-danger">
+                              <i class="layui-icon">&#xe640;</i>删除
+                          </a>
+                      </td>
+                  </tr>
+              {%endfor%}
+            </tbody>
+        </table>
+
+        {# 添加业务模块 #}
+        <a href="/devops/add_business" class="layui-btn layui-btn-warm">
+            <i class="layui-icon">&#xe654;</i> 添加
+        </a>
+    </div>
+{% endblock %}

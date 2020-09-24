@@ -1,0 +1,123 @@
+{% extends "devops/base.html" %}
+
+{% block content %}
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">
+            <img src="/static/media/logo.png" class="layui-logo">
+        </div>
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="">返回首页</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">更多功能</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">故障管理</a></dd>
+                    <dd><a href="">接口管理</a></dd>
+                    <dd><a href="">授权管理</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="/static/media/hauwei.jpg" class="layui-nav-img">
+                    用户名：{{userinfo.username}}
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">个人信息</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="/devops/login/">退出登录</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree"  id="left_nav">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" new_url="/devops/dashboard/">仪表盘</a></dd>
+                     </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">基础信息管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" new_url="/devops/device/">设备管理</a></dd>
+                        <dd><a href="javascript:;" new_url="/devops/business">业务线&项目&应用</a></dd>
+                        <dd><a href="javascript:;" new_url="/devops/domain">域名管理</a></dd>
+                        <dd><a href="javascript:;" new_url="/devops/supplier">供应商管理</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">发布工具</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" new_url="minister/order_list">业务程序发布</a></dd>
+                        <dd><a href="javascript:;" new_url="minister/order_issue">数据库发布</a></dd>
+                        <dd><a href="javascript:;" new_url="minister/order_statistics">基础组件发布</a></dd>
+                        <dd><a href="javascript:;" new_url="minister/order_assessment">定时脚本发布</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">运营支撑组件</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" new_url="group/order_list">接口管理与测试</a></dd>
+                        <dd><a href="javascript:;" new_url="group/order_issue">安全监控与告警</a></dd>
+                        <dd><a href="javascript:;" new_url="group/order_assessment">性能压测</a></dd>
+                        <dd><a href="javascript:;" new_url="group/order_statistics">漏洞管理</a></dd>
+                    </dl>
+                </li>
+                 <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">知识库</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" new_url="employee/order_list">mysql</a></dd>
+                        <dd><a href="javascript:;" new_url="employee/order_issue">elasticsearch</a></dd>
+                        <dd><a href="javascript:;" new_url="employee/order_assessment">redis</a></dd>
+                        <dd><a href="javascript:;" new_url="employee/order_statistics">mongodb</a></dd>
+                        <dd><a href="javascript:;" new_url="employee/order_statistics">django</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+        <span class="indent-left-nav">
+           <i class="layui-icon" >&#xe668;</i>
+        </span>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div class="layui-tab layui-tab-brief " lay-filter="main_tab" id="main_tab" lay-allowclose="true" lay-allowRefresh="true" style="margin:0 ;width:100%; padding:0px;" >
+            <ul class="layui-tab-title">
+            </ul>
+            <div class="layui-tab-content" id="content-main" style="width:100% ; margin:0px ; " >
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        @ALL 道合顺网络运维服务平台
+    </div>
+</div>
+
+<script>
+    layui.use('element', function(){
+        var $ = layui.jquery, element = layui.element;
+        $("#left_nav a").click(function(){
+            new_url = this.getAttribute("new_url");
+            new_url_flag = true
+            $("#main_tab .layui-tab-title li").each(function(i, v){if (new_url==v.getAttribute("lay-id")){new_url_flag=false;return false;}});
+            if(new_url_flag){
+                title = this.textContent;
+                element.tabAdd('main_tab', {
+                    title: title
+                    ,content: '<iframe scrolling="auto"   frameborder="0"  src="html_page?new_url='+new_url+'"   style="width: 2200px;height: 700px;padding: 0;margin: 0;margin-left:-500px;"></iframe>'
+                    ,id: new_url
+                });
+            }
+            element.tabChange('main_tab', new_url);
+
+        });
+    });
+</script>
+
+{% endblock %}

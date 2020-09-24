@@ -1,0 +1,59 @@
+{% extends "devops/base.html" %}
+{% block content %}
+    <div class="layui-container">
+        {# 查询业务模块 #}
+        <form action="/devops/search_supplier" method="get">
+            业务名称：<input type="text" style="width:200px; height:30px;" placeholder="supplier" name="supplier" id="supplier">
+            <input type="submit" class="layui-btn" value="搜索">
+        </form>
+
+        {# 显示所有业务模块 #}
+        <table class="layui-table">
+            <thead>
+              <tr>
+                  <th style="width:2%">id</th>
+                  <th style="width:4%">company</th>
+                  <th style="width:4%">address</th>
+                  <th style="width:6%">idc_address</th>
+                  <th style="width:6%">contact</th>
+                  <th style="width:6%">contact_phone</th>
+                  <th style="width:6%">assistant</th>
+                  <th style="width:6%">assistant_phone</th>
+                  <th style="width:2%">修改</th>
+                  <th style="width:2%">删除</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for domain in data%}
+                  <tr>
+                      <td style="width:2%">id</td>
+                      <td style="width:4%">company</td>
+                      <td style="width:4%">address</td>
+                      <td style="width:6%">idc_address</td>
+                      <td style="width:6%">contact</td>
+                      <td style="width:6%">contact_phone</td>
+                      <td style="width:6%">assistant</td>
+                      <td style="width:6%">assistant_phone</td>
+                      <td  style="width:1%">
+                          {# 修改业务模块 #}
+                          <a href="/devops/get_supplier/{{ supplier.id }}/" class="layui-btn layui-btn-normal">
+                              <i class="layui-icon">&#xe642;</i>修改
+                          </a>
+                      </td>
+                      <td  style="width:1%">
+                          {# 删除业务模块 #}
+                          <a href="/devops/delete_supplier/{{ supplier.id }}" class="layui-btn layui-btn-danger">
+                              <i class="layui-icon">&#xe640;</i>删除
+                          </a>
+                      </td>
+                  </tr>
+              {%endfor%}
+            </tbody>
+        </table>
+
+        {# 添加业务模块 #}
+        <a href="/devops/add_supplier" class="layui-btn layui-btn-warm">
+            <i class="layui-icon">&#xe654;</i> 添加
+        </a>
+    </div>
+{% endblock %}

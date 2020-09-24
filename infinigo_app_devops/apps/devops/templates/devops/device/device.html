@@ -1,0 +1,80 @@
+{% extends "devops/base.html" %}
+{% block content %}
+
+    <div class="layui-container">
+        {# 查询设备模块 #}
+        <form action="/devops/search_device" method="get">
+            设备名称：<input type="text" style="width:230px; height:30px;" placeholder="web" name="name" id="name">
+            <input type="submit" class="layui-btn" value="搜索">
+        </form>
+
+
+        {# 显示所有设备模块 #}
+
+        <table class="layui-table" style="margin:0 ;width:100%; padding:0px;">
+            <colgroup>
+                <col width="2000">
+                <col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th style="width:8%">id</th>
+                    <th style="width:8%">设备名称</th>
+                    <th style="width:8%">local_ip</th>
+                    <th style="width:8%">public_ip</th>
+                    <th style="width:8%">ssh_port</th>
+                    <th style="width:8%">环境</th>
+                    <th style="width:8%">位置</th>
+                    <th style="width:8%">user</th>
+                    <th style="width:8%">图片</th>
+                    <th style="width:8%">管理员</th>
+                    <th style="width:8%">修改</th>
+                    <th style="width:8%">删除</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for device in data%}
+                    <tr>
+                        <td style="width:8%">{{device.id}}</td>
+                        <td style="width:8%">{{device.name}}</td>
+                        <td style="width:8%">{{device.local_ip}}</td>
+                        <td style="width:8%">{{device.public_ip}}</td>
+                        <td style="width:8%">{{device.ssh_port}}</td>
+                        <td style="width:8%">{{device.environment}}</td>
+                        <td style="width:8%">{{device.address}}</td>
+                        <td style="width:8%">{{device.user}}</td>
+                        <td style="width:8%">
+                          <img src="{{ device.t_image }}" height="50px">
+                        </td>
+                        <td style="width:8%">{{device.leader}}</td>
+
+                        <td style="width:8%">
+                          {# 修改设备模块 #}
+                          <a href="/devops/get_device/{{ device.id }}/" class="layui-btn layui-btn-normal">
+                              <i class="layui-icon">&#xe642;</i>修改
+                          </a>
+                        </td>
+                        <td style="width:8%">
+                          {# 删除设备模块 #}
+                          <a href="/devops/delete_device/{{ device.id }}" class="layui-btn layui-btn-danger">
+                              <i class="layui-icon">&#xe640;</i>删除
+                          </a>
+                        </td>
+                    </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+
+
+
+        {# 添加设备模块 #}
+        <a href="/devops/add_device" class="layui-btn layui-btn-warm">
+            <i class="layui-icon">&#xe654;</i> 添加
+        </a>
+    </div>
+{% endblock %}
+
+
+
+
+
