@@ -109,3 +109,9 @@ v8.17.0
 
 cnpm install element-ui
 cnpm install coffeescript
+
+# vue参考
+很显然vue-admin-beautiful已经完全后来者居上了
+开源地址：https://github.com/chuzhixin/vue-admin-beautiful/
+演示地址：https://chu1204505056.gitee.io/vue-admin-beautiful/
+pro演示地址：https://chu1204505056.gitee.io/vue-admin-beautiful-pro/

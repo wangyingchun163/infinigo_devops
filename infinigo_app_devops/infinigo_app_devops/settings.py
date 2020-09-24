@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cmdb',
     'myDjangoApp',
+    'devops',
 ]
 
 MIDDLEWARE = [
@@ -139,3 +140,6 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+
+X_FRAME_OPTIONS = 'ALLOWALL http://192.168.1.176:8000'

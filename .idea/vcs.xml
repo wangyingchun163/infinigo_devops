@@ -2,5 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/infinigo_web_devops/electron-vue-admin" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/infinigo_web_devops/vue-admin-beautiful" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/infinigo_web_devops/vue-admin-template" vcs="Git" />
   </component>
 </project>
