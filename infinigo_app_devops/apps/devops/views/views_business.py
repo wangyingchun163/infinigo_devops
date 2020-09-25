@@ -43,7 +43,7 @@ def all_business(request):
 def add_business(request):
     leader_list = User.objects.all()
     content = {'leader_list': leader_list}
-    return render(request, 'devops/business/add_business.html' , content)
+    return render(request, 'devops/business/add_business.html', content)
 
 # 添加业务提交保存
 @check_login
@@ -52,15 +52,14 @@ def add_business_commit(request):
     business = request.POST['business']
     project = request.POST['project']
     application = request.POST['application']
-    leader = request.POST['leader']
-    leader_id = User.objects.get(username = leader)
-    print(leader_id.username)
+    leader_id = request.POST['leader']
 
     business_obj = Business()
     business_obj.business = business
     business_obj.project = project
     business_obj.application = application
-    business_obj.leader = leader_id
+
+    business_obj.leader_id = leader_id
     business_obj.save()
 
     return redirect('/devops/business')

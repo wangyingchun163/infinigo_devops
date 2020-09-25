@@ -130,7 +130,7 @@ def update_device(request):
 @xframe_options_sameorigin
 def search_device(request):
     name = request.GET['name']
-    device = Device.objects.filter(name=name)
+    device = Device.objects.filter(name__icontains=name)
     content={'data':device}
     return render(request,'devops/device/device.html', content)
 
