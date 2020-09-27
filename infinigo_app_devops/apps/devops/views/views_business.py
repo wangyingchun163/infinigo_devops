@@ -53,11 +53,21 @@ def add_business_commit(request):
     project = request.POST['project']
     application = request.POST['application']
     leader_id = request.POST['leader']
+    deploy_dir = request.POST['deploy_dir']
+    log_dir = request.POST['log_dir']
+    local_ip = request.POST['local_ip']
+    port = request.POST['port']
+
 
     business_obj = Business()
     business_obj.business = business
     business_obj.project = project
     business_obj.application = application
+    business_obj.deploy_dir = deploy_dir
+    business_obj.log_dir = log_dir
+    business_obj.local_ip = local_ip
+    business_obj.port = port
+
 
     business_obj.leader_id = leader_id
     business_obj.save()
@@ -84,10 +94,15 @@ def update_business(request):
     business = request.POST['business']
     project = request.POST['project']
     application = request.POST['application']
+    deploy_dir = request.POST['deploy_dir']
+    log_dir = request.POST['log_dir']
+    local_ip = request.POST['local_ip']
+    port = request.POST['port']
     leader = request.POST['leader']
     leader_id = User.objects.get(username = leader)
     print(leader_id.username)
-    Business.objects.filter(id=id).update(business=business,project=project,application=application,leader=leader_id)
+    Business.objects.filter(id=id).update(business=business,project=project,application=application
+                                          ,deploy_dir=deploy_dir,log_dir=log_dir,local_ip=local_ip,port=port,leader=leader_id)
     return redirect('/devops/business')
 
 #查询业务
@@ -95,7 +110,7 @@ def update_business(request):
 @xframe_options_sameorigin
 def search_business(request):
     business = request.GET['business']
-    business_obj = Business.objects.filter(business=business)
+    business_obj = Business.objects.filter(business__icontains=business)
     content={'data':business_obj}
     return render(request,'devops/business/business.html', content)
 
