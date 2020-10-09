@@ -51,11 +51,13 @@ def add_domain_commit(request):
     domain = request.POST['domain']
     ip = request.POST['ip']
     cname = request.POST['cname']
+    remark = request.POST['remark']
 
     domain_obj = Domain()
     domain_obj.domain = domain
     domain_obj.ip = ip
     domain_obj.cname = cname
+    domain_obj.remark = remark
 
     domain_obj.save()
     return redirect('/devops/domain')
@@ -81,8 +83,9 @@ def update_domain(request):
     domain = request.POST['domain']
     ip = request.POST['ip']
     cname = request.POST['cname']
+    remark = request.POST['remark']
 
-    Domain.objects.filter(id=id).update(domain=domain,ip=ip,cname=cname)
+    Domain.objects.filter(id=id).update(domain=domain,ip=ip,cname=cname,remark=remark)
     return redirect('/devops/domain')
 
 #查询业务
@@ -90,7 +93,7 @@ def update_domain(request):
 @xframe_options_sameorigin
 def search_domain(request):
     domain = request.GET['domain']
-    domain_obj = Domain.objects.filter(domain=domain)
+    domain_obj = Domain.objects.filter(domain__icontains=domain)
     content={'data':domain_obj}
     return render(request,'devops/domain/domain.html', content)
 
@@ -98,6 +101,6 @@ def search_domain(request):
 @check_login
 @xframe_options_sameorigin
 def delete_domain(request,domain_id):
-    domain.objects.filter(id=domain_id).delete()
+    Domain.objects.filter(id=domain_id).delete()
     return redirect('/devops/domain')
 

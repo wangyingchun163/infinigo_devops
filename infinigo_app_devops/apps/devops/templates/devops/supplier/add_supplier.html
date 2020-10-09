@@ -2,23 +2,35 @@
 {% block content %}
     <div class="layui-container" >
         <blockquote class="layui-elem-quote">
-            <h1>add device</h1>
+            <h1>add supplier</h1>
         </blockquote>
 
         <div class="layui-row" >
 
             <div class="layui-col-md5" >
-                <form action="/devops/add_domain_commit/" method="POST" enctype="multipart/form-data"/>
+                <form action="/devops/add_supplier_commit/" method="POST" enctype="multipart/form-data"/>
                     {% csrf_token %}
                     <hr class="layui-bg-green">
 
-                    DOMAIN：<input type="text" name="domain" id="domain" placeholder="domain" class="layui-input"/>
+                    company：<input type="text" name="company" id="company" placeholder="company" class="layui-input"/>
                     <hr class="layui-bg-green">
 
-                    IP：<input type="text" name="ip" id="ip" placeholder="ip" class="layui-input"/>
+                    address：<input type="text" name="address" id="address" placeholder="address" class="layui-input"/>
                     <hr class="layui-bg-green">
 
-                    CNAME：<input type="text" name="cname" id="cname" placeholder="cname" class="layui-input"/>
+                    idc_address：<input type="text" name="idc_address" id="idc_address" placeholder="idc_address" class="layui-input"/>
+                    <hr class="layui-bg-green">
+
+                    contact：<input type="text" name="contact" id="contact" placeholder="contact" class="layui-input"/>
+                    <hr class="layui-bg-green">
+
+                    contact_phone：<input type="text" name="contact_phone" id="contact_phone" placeholder="contact_phone" class="layui-input"/>
+                    <hr class="layui-bg-green">
+
+                    assistant：<input type="text" name="assistant" id="assistant" placeholder="assistant" class="layui-input"/>
+                    <hr class="layui-bg-green">
+
+                    assistant_phone：<input type="text" name="assistant_phone" id="assistant_phone" placeholder="assistant_phone" class="layui-input"/>
                     <hr class="layui-bg-green">
 
                     <!--

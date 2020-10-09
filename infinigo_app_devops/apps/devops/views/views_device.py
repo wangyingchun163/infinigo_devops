@@ -44,7 +44,9 @@ def all_device(request):
 @check_login
 @xframe_options_sameorigin
 def add_device(request):
-    return render(request, 'devops/device/add_device.html')
+    leader_list = User.objects.all()
+    content = {'leader_list': leader_list}
+    return render(request, 'devops/device/add_device.html', content)
 
 # 添加设备提交保存
 @check_login
@@ -53,11 +55,13 @@ def add_device_commit(request):
     name = request.POST['name']
     local_ip = request.POST['local_ip']
     public_ip = request.POST['public_ip']
+    environment = request.POST['environment']
+    address = request.POST['address']
     ssh_port = request.POST['ssh_port']
     user = request.POST['user']
     password = request.POST['password']
     t_image = request.FILES['t_image']
-    leader = request.POST['leader']
+    leader_id = request.POST['leader']
 
     fname = os.path.join(settings.MEDIA_ROOT, t_image.name)
     with open(fname, 'wb') as pic:
@@ -65,24 +69,25 @@ def add_device_commit(request):
             pic.write(c)
 
     #关联表获取对象，方便为插入赋值
-    leader_id = User.objects.get(username = leader)
-    print(leader_id.username)
+    # leader_id = User.objects.get(username = leader)
+    # print(leader_id.username)
 
-    device = Device()
-    device.name = name
-    device.local_ip = local_ip
-    device.public_ip = public_ip
-    device.ssh_port = ssh_port
-    device.user = user
-    device.password = h.update(bytes(password, encoding='utf-8'))
+    device_obj = Device()
+    device_obj.name = name
+    device_obj.local_ip = local_ip
+    device_obj.public_ip = public_ip
+    device_obj.ssh_port = ssh_port
+    device_obj.environment = environment
+    device_obj.address = address
+    device_obj.user = user
     h = hashlib.sha256()
-    h.update(bytes(device.password, encoding='utf-8'))
-    device.password = h.hexdigest()
-    device.t_image = t_image
-    device.leader = leader_id
+    device_obj.password = h.update(bytes(password, encoding='utf-8'))
+    device_obj.password = h.hexdigest()
+    device_obj.t_image = t_image
+    device_obj.leader_id = leader_id
     # 存访问路径到数据库
-    device.t_image = os.path.join("/static/media/", t_image.name)
-    device.save()
+    device_obj.t_image = os.path.join("/static/media/", t_image.name)
+    device_obj.save()
 
     return redirect('/devops/device')
 
@@ -104,6 +109,8 @@ def update_device(request):
     local_ip = request.POST['local_ip']
     public_ip = request.POST['public_ip']
     ssh_port = request.POST['ssh_port']
+    environment = request.POST['environment']
+    address = request.POST['address']
     user = request.POST['user']
     passwordstr = request.POST['password']
     h = hashlib.sha256()
@@ -122,7 +129,10 @@ def update_device(request):
     leader_id = User.objects.get(username = leader)
     print(leader_id.username)
     t_image = os.path.join("/static/media/", t_image.name)
-    Device.objects.filter(id=id).update(name=name, local_ip=local_ip, public_ip=public_ip, ssh_port=ssh_port, user=user, password=password, t_image=t_image, leader=leader_id)
+    Device.objects.filter(id=id).update(name=name, local_ip=local_ip, public_ip=public_ip,
+                                        ssh_port=ssh_port, user=user, password=password,
+                                        environment=environment, address=address,
+                                        t_image=t_image, leader=leader_id)
     return redirect('/devops/device')
 
 #查询设备

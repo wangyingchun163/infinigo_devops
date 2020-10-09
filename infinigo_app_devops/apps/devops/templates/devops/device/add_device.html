@@ -24,6 +24,12 @@
                     ssh端口：<input type="text" name="ssh_port" id="ssh_port" placeholder="ssh_port" class="layui-input"/>
                     <hr class="layui-bg-green">
 
+                    所属环境：<input type="text" name="environment" id="environment" placeholder="environment" class="layui-input"/>
+                    <hr class="layui-bg-green">
+
+                    物理位置：<input type="text" name="address" id="address" placeholder="address" class="layui-input"/>
+                    <hr class="layui-bg-green">
+
                     ssh账号：<input type="text" name="user" id="user" placeholder="user" class="layui-input"/>
                     <hr class="layui-bg-green">
 
@@ -33,8 +39,14 @@
                     设备照片：<input type="file" name="t_image" id="t_image"/>
                     <hr class="layui-bg-green">
 
-                    设备管理员：<input type="text" name="leader" id="leader" placeholder="leader" class="layui-input"/>
-                    <hr class="layui-bg-green">
+                    设备管理员：<select name="leader"  id="leader" lay-verify="required"  onchange="" lay-search="" class="layui-select-none" style="height: 35px">
+                      <option value="">请选择管理员</option>
+                        {%for leader in leader_list%}
+                            <tr>
+                                <option value={{leader.id}}>{{leader.username}}</option>
+                            </tr>
+                        {%endfor%}
+                    </select>
 
                     <hr class="layui-bg-green">
                     <input type="submit" value="添加" class="layui-btn"/>

@@ -109,9 +109,9 @@ def update_business(request):
 @check_login
 @xframe_options_sameorigin
 def search_business(request):
-    business = request.GET['business']
-    business_obj = Business.objects.filter(business__icontains=business)
-    content={'data':business_obj}
+    project = request.GET['project']
+    project_obj = Business.objects.filter(project__icontains=project)
+    content={'data':project_obj}
     return render(request,'devops/business/business.html', content)
 
 #删除业务

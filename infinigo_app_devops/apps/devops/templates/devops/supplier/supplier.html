@@ -3,7 +3,7 @@
     <div class="layui-container">
         {# 查询业务模块 #}
         <form action="/devops/search_supplier" method="get">
-            业务名称：<input type="text" style="width:200px; height:30px;" placeholder="supplier" name="supplier" id="supplier">
+            业务名称：<input type="text" style="width:200px; height:30px;" placeholder="company" name="company" id="company">
             <input type="submit" class="layui-btn" value="搜索">
         </form>
 
@@ -12,8 +12,8 @@
             <thead>
               <tr>
                   <th style="width:2%">id</th>
-                  <th style="width:4%">company</th>
-                  <th style="width:4%">address</th>
+                  <th style="width:32%">company</th>
+                  <th style="width:32%">address</th>
                   <th style="width:6%">idc_address</th>
                   <th style="width:6%">contact</th>
                   <th style="width:6%">contact_phone</th>
@@ -24,16 +24,16 @@
               </tr>
             </thead>
             <tbody>
-              {%for domain in data%}
+              {%for supplier in data%}
                   <tr>
-                      <td style="width:2%">id</td>
-                      <td style="width:4%">company</td>
-                      <td style="width:4%">address</td>
-                      <td style="width:6%">idc_address</td>
-                      <td style="width:6%">contact</td>
-                      <td style="width:6%">contact_phone</td>
-                      <td style="width:6%">assistant</td>
-                      <td style="width:6%">assistant_phone</td>
+                      <td style="width:2%">{{ supplier.id }}</td>
+                      <td style="width:32%">{{ supplier.company }}</td>
+                      <td style="width:32%">{{ supplier.address }}</td>
+                      <td style="width:6%">{{ supplier.idc_address }}</td>
+                      <td style="width:6%">{{ supplier.contact }}</td>
+                      <td style="width:6%">{{ supplier.contact_phone }}</td>
+                      <td style="width:6%">{{ supplier.assistant }}</td>
+                      <td style="width:6%">{{ supplier.assistant_phone }}</td>
                       <td  style="width:1%">
                           {# 修改业务模块 #}
                           <a href="/devops/get_supplier/{{ supplier.id }}/" class="layui-btn layui-btn-normal">

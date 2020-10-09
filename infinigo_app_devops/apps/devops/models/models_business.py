@@ -10,7 +10,7 @@ class Business(models.Model):
     deploy_dir = models.CharField(max_length=100)  #部署路径
     log_dir = models.CharField(max_length=100)   #日志路径
     local_ip = models.CharField(max_length=18)  #部署IP
-    port = models.IntegerField(max_length=5)  #端口号
+    port = models.IntegerField()  #端口号
     #leader = models.ForeignKey(User, blank=True, null=True , related_name='username', on_delete=models.SET_NULL)   #负责人
     leader = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)   #负责人
     def __str__(self):

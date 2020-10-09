@@ -22,8 +22,7 @@ def supplier(request):
     if userobj:
         if request.method == 'GET':
             data = Supplier.objects.all()
-            print(data)
-            content={'data': data }
+            content = {'data': data}
             return render(request, 'devops/supplier/supplier.html', content)
         else:
             return HttpResponse('only get!')
@@ -31,10 +30,10 @@ def supplier(request):
 # 列出所有业务 -- 暂未使用的接口
 @check_login
 @xframe_options_sameorigin
-def all_domain(request):
-    data = domain.objects.all()
+def all_supplier(request):
+    data = supplier.objects.all()
     content={'data': data}
-    return render(request, 'devops/domain/domain.html', content)
+    return render(request, 'devops/supplier/supplier.html', content)
 
 # 添加业务页面
 @check_login
@@ -42,62 +41,78 @@ def all_domain(request):
 def add_supplier(request):
     leader_list = User.objects.all()
     content = {'leader_list': leader_list}
-    return render(request, 'devops/supplier/add_supplier.html' , content)
+    return render(request, 'devops/supplier/add_supplier.html', content)
 
 # 添加业务提交保存
 @check_login
 @xframe_options_sameorigin
-def add_domain_commit(request):
-    domain = request.POST['domain']
-    ip = request.POST['ip']
-    cname = request.POST['cname']
+def add_supplier_commit(request):
+    company = request.POST['company']
+    address = request.POST['address']
+    idc_address = request.POST['idc_address']
+    contact = request.POST['contact']
+    contact_phone = request.POST['contact_phone']
+    assistant = request.POST['assistant']
+    assistant_phone = request.POST['assistant_phone']
+    #print("{}{}{}{}{}{}{}".format(company,address,idc_address,contact,contact_phone,assistant,assistant_phone))
 
-    domain_obj = Domain()
-    domain_obj.domain = domain
-    domain_obj.ip = ip
-    domain_obj.cname = cname
+    supplier_obj = Supplier()
+    supplier_obj.company = company
+    supplier_obj.address = address
+    supplier_obj.idc_address = idc_address
+    supplier_obj.contact = contact
+    supplier_obj.contact_phone = contact_phone
+    supplier_obj.assistant = assistant
+    supplier_obj.assistant_phone = assistant_phone
+    print("{}{}{}{}{}{}{}".format(supplier_obj.company,supplier_obj.address,supplier_obj.idc_address,supplier_obj.contact,
+                                  supplier_obj.contact_phone,supplier_obj.assistant,supplier_obj.assistant_phone))
 
-    domain_obj.save()
-    return redirect('/devops/domain')
+    supplier_obj.save()
+    return redirect('/devops/supplier')
 
 # 修改业务页面
 @check_login
 @xframe_options_sameorigin
-def get_domain_by_id(request,domain_id):
-    domain = Domain.objects.filter(id=domain_id)
-    #leader_id = Domain.objects.filter(id=domain_id).values("leader").first()['leader']
+def get_supplier_by_id(request,supplier_id):
+    supplier = Supplier.objects.filter(id=supplier_id)
+    #leader_id = supplier.objects.filter(id=supplier_id).values("leader").first()['leader']
     #leader_name = User.objects.filter(id=leader_id).values("username").first()
     #print(leader_name)
     #leader_all = User.objects.all()
-    #content = {'data': domain , "leader_name": leader_name ,"leader_all":leader_all}
-    content = {'data': domain}
-    return  render(request,'devops/domain/update_domain.html',content)
+    #content = {'data': supplier , "leader_name": leader_name ,"leader_all":leader_all}
+    content = {'data': supplier}
+    return render(request,'devops/supplier/update_supplier.html',content)
 
 # 修改业务保存
 @check_login
 @xframe_options_sameorigin
-def update_domain(request):
+def update_supplier(request):
     id = request.POST['id']
-    domain = request.POST['domain']
-    ip = request.POST['ip']
-    cname = request.POST['cname']
+    company = request.POST['company']
+    address = request.POST['address']
+    idc_address = request.POST['idc_address']
+    contact = request.POST['contact']
+    contact_phone = request.POST['contact_phone']
+    assistant = request.POST['assistant']
+    assistant_phone = request.POST['assistant_phone']
 
-    Domain.objects.filter(id=id).update(domain=domain,ip=ip,cname=cname)
-    return redirect('/devops/domain')
+    Supplier.objects.filter(id=id).update(company=company,address=address,idc_address=idc_address,
+                                          contact=contact,contact_phone=contact_phone,assistant=assistant,assistant_phone=assistant_phone)
+    return redirect('/devops/supplier')
 
 #查询业务
 @check_login
 @xframe_options_sameorigin
-def search_domain(request):
-    domain = request.GET['domain']
-    domain_obj = Domain.objects.filter(domain=domain)
-    content={'data':domain_obj}
-    return render(request,'devops/domain/domain.html', content)
+def search_supplier(request):
+    company = request.GET['company']
+    supplier_obj = Supplier.objects.filter(company__icontains=company)
+    content={'data':supplier_obj}
+    return render(request,'devops/supplier/supplier.html', content)
 
 #删除业务
 @check_login
 @xframe_options_sameorigin
-def delete_domain(request,domain_id):
-    domain.objects.filter(id=domain_id).delete()
-    return redirect('/devops/domain')
+def delete_supplier(request,supplier_id):
+    Supplier.objects.filter(id=supplier_id).delete()
+    return redirect('/devops/supplier')
 

@@ -3,7 +3,7 @@
     <div class="layui-container">
         {# 查询业务模块 #}
         <form action="/devops/search_domain" method="get">
-            业务名称：<input type="text" style="width:200px; height:30px;" placeholder="domain" name="domain" id="domain">
+            域名：<input type="text" style="width:200px; height:30px;" placeholder="domain" name="domain" id="domain">
             <input type="submit" class="layui-btn" value="搜索">
         </form>
 
@@ -12,9 +12,10 @@
             <thead>
               <tr>
                   <th style="width:2%">id</th>
-                  <th style="width:4%">domain</th>
+                  <th style="width:30%">domain</th>
                   <th style="width:4%">ip</th>
-                  <th style="width:6%">cname</th>
+                  <th style="width:22%">cname</th>
+                  <th style="width:40%">remark</th>
                   <th style="width:1%">修改</th>
                   <th style="width:1%">删除</th>
               </tr>
@@ -23,9 +24,10 @@
               {%for domain in data%}
                   <tr>
                       <td  style="width:2%">{{domain.id}}</td>
-                      <td  style="width:4%">{{domain.domain}}</td>
+                      <td  style="width:30%">{{domain.domain}}</td>
                       <td  style="width:4%">{{domain.ip}}</td>
-                      <td  style="width:6%">{{domain.cname}}</td>
+                      <td  style="width:22%">{{domain.cname}}</td>
+                      <td  style="width:40%">{{domain.remark}}</td>
                       <td  style="width:1%">
                           {# 修改业务模块 #}
                           <a href="/devops/get_domain/{{ domain.id }}/" class="layui-btn layui-btn-normal">
