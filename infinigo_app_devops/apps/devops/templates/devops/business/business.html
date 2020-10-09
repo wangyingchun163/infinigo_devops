@@ -12,37 +12,37 @@
             <thead>
               <tr>
                   <th style="width:5%">id</th>
-                  <th style="width:10%">business</th>
-                  <th style="width:10%">project</th>
-                  <th style="width:10%">application</th>
-                  <th style="width:10%">local_ip</th>
-                  <th style="width:10%">port</th>
-                  <th style="width:10%">deploy_dir</th>
-                  <th style="width:10%">log_dir</th>
-                  <th style="width:10%">leader</th>
-                  <th style="width:5%">修改</th>
-                  <th style="width:5%">删除</th>
+                  <th style="width:5%">business</th>
+                  <th style="width:5%">project</th>
+                  <th style="width:5%">application</th>
+                  <th style="width:5%">local_ip</th>
+                  <th style="width:5%">port</th>
+                  <th style="width:6%">deploy_dir</th>
+                  <th style="width:6%">log_dir</th>
+                  <th style="width:5%">leader</th>
+                  <th style="width:2%">修改</th>
+                  <th style="width:2%">删除</th>
               </tr>
             </thead>
             <tbody>
               {%for business in data%}
                   <tr>
                       <td  style="width:5%">{{business.id}}</td>
-                      <td  style="width:10%">{{business.business}}</td>
-                      <td  style="width:10%">{{business.project}}</td>
-                      <td  style="width:10%">{{business.application}}</td>
-                      <td  style="width:10%">{{business.local_ip}}</td>
-                      <td  style="width:10%">{{business.port}}</td>
-                      <td  style="width:10%">{{business.deploy_dir}}</td>
-                      <td  style="width:10%">{{business.log_dir}}</td>
-                      <td  style="width:10%">{{business.leader}}</td>
-                      <td  style="width:5%">
+                      <td  style="width:5%">{{business.business}}</td>
+                      <td  style="width:5%">{{business.project}}</td>
+                      <td  style="width:5%">{{business.application}}</td>
+                      <td  style="width:5%">{{business.local_ip}}</td>
+                      <td  style="width:5%">{{business.port}}</td>
+                      <td  style="width:6%">{{business.deploy_dir}}</td>
+                      <td  style="width:6%">{{business.log_dir}}</td>
+                      <td  style="width:5%">{{business.leader}}</td>
+                      <td  style="width:2%">
                           {# 修改业务模块 #}
                           <a href="/devops/get_business/{{ business.id }}/" class="layui-btn layui-btn-normal">
                               <i class="layui-icon">&#xe642;</i>修改
                           </a>
                       </td>
-                      <td  style="width:5%">
+                      <td  style="width:2%">
                           {# 删除业务模块 #}
                           <a href="/devops/delete_business/{{ business.id }}" class="layui-btn layui-btn-danger">
                               <i class="layui-icon">&#xe640;</i>删除
