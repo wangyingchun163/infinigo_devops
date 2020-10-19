@@ -41,7 +41,7 @@
                      </dl>
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">基础信息管理</a>
+                    <a class="" >基础信息管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" new_url="/devops/device/">设备管理</a></dd>
                         <dd><a href="javascript:;" new_url="/devops/business">业务线&项目&应用</a></dd>
@@ -50,7 +50,7 @@
                     </dl>
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">发布工具</a>
+                    <a class="" href="javascript:;" new_url="minister/order_list">发布工具</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" new_url="minister/order_list">业务程序发布</a></dd>
                         <dd><a href="javascript:;" new_url="minister/order_issue">数据库发布</a></dd>
@@ -59,7 +59,7 @@
                     </dl>
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">运营支撑组件</a>
+                    <a class="" href="javascript:;" new_url="group/order_list">运营支撑组件</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" new_url="group/order_list">接口管理与测试</a></dd>
                         <dd><a href="javascript:;" new_url="group/order_issue">安全监控与告警</a></dd>
@@ -68,7 +68,7 @@
                     </dl>
                 </li>
                  <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">知识库</a>
+                    <a class="" href="javascript:;" new_url="employee/order_list">知识库</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" new_url="employee/order_list">mysql</a></dd>
                         <dd><a href="javascript:;" new_url="employee/order_issue">elasticsearch</a></dd>
@@ -106,7 +106,7 @@
             new_url = this.getAttribute("new_url");
             new_url_flag = true
             $("#main_tab .layui-tab-title li").each(function(i, v){if (new_url==v.getAttribute("lay-id")){new_url_flag=false;return false;}});
-            if(new_url_flag){
+            if(new_url_flag && new_url){
                 title = this.textContent;
                 element.tabAdd('main_tab', {
                     title: title
