@@ -9,4 +9,3 @@ class User(models.Model):
 
     def __str__(self):
         return '[{}]'.format(self.username).replace('[','').replace(']','')
-        # return '[username={},id={}]'.format((self.username).replace('[', '').replace(']', ''), self.id)
