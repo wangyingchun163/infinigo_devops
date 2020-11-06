@@ -19,9 +19,3 @@ class Device(models.Model):
 
     def __str__(self):
         return '[id={},name={},local_ip={},public_ip={},ssh_port={},user={},password={},t_image={},leader={}]'.format(self.id,self.name,self.local_ip,self.public_ip,self.ssh_port,self.user,self.password,self.t_image,self.leader)
-
-
-
-
-
-
