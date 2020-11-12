@@ -133,9 +133,12 @@ def search_device(request):
     content={'data':device}
     return render(request,'devops/device/device.html', content)
 
-#删除设备
+#删除 设备
 @check_login
 @xframe_options_sameorigin
 def delete_device(request,device_id):
     Device.objects.filter(id=device_id).delete()
     return redirect('/devops/device')
+
+
+
