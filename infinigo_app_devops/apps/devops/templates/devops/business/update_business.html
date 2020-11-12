@@ -30,16 +30,11 @@
                     port<input type="text" name="port" id="port" placeholder="port" class="layui-input" value="{{ business.port }}"/>
                     <hr class="layui-bg-green">
 
-                    <!--
-                    管理员<input type="text" name="leader" id="leader" placeholder="leader" class="layui-input" value="{{ leader_name.username }}"/>
-                    <hr class="layui-bg-green">
-                    -->
-
                     业务管理员：<select name="leader"  id="leader" lay-verify="required"   onchange="" lay-search="" class="layui-select-none" style="height: 35px">
                       <option value="">{{ leader_name.username }}</option>
                         {%for leader in leader_all%}
                             <tr>
-                                <option value={{leader.username}}>{{leader.username}}</option>
+                                <option value={{leader.id}}  selected="selected">{{leader.username}}</option>
                             </tr>
                         {%endfor%}
                     </select>

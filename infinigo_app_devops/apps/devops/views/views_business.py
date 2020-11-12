@@ -6,25 +6,24 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.decorators.clickjacking import xframe_options_deny
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 
-
 # Create your views here.
 from django.conf import settings    # 获取 settings.py 里边配置的信息
 import os
 
-from ..models.models_business import Business, User
+from ..models.models_business import Business
 from .views_user import *
 
 @check_login
 @xframe_options_sameorigin
 def business(request):
     username = request.session.get('username')
+    userobj = User.objects.get(username=username)
 
-    userobj = User.objects.filter(username=username)
     if userobj:
+        # username = userobj.username
         if request.method == 'GET':
-
             data = Business.objects.all()
-            content={'data': data }
+            content = {'data': data}
             return render(request, 'devops/business/business.html', content)
         else:
             return HttpResponse('only get!')
@@ -34,7 +33,7 @@ def business(request):
 @xframe_options_sameorigin
 def all_business(request):
     data = Business.objects.all()
-    content={'data': data}
+    content = {'data': data}
     return render(request, 'devops/business/business.html', content)
 
 # 添加业务页面
@@ -58,20 +57,15 @@ def add_business_commit(request):
     local_ip = request.POST['local_ip']
     port = request.POST['port']
 
-
-    business_obj = Business()
-    business_obj.business = business
-    business_obj.project = project
-    business_obj.application = application
-    business_obj.deploy_dir = deploy_dir
-    business_obj.log_dir = log_dir
-    business_obj.local_ip = local_ip
-    business_obj.port = port
-
-
-    business_obj.leader_id = leader_id
-    business_obj.save()
-
+    leader_objects = User.objects.get(id=leader_id).id
+    Business.objects.create(leader_id=leader_objects,
+                            business=business,
+                            project=project,
+                            application=application,
+                            deploy_dir=deploy_dir,
+                            log_dir=log_dir,
+                            local_ip=local_ip,
+                            port=port)
     return redirect('/devops/business')
 
 # 修改业务页面
@@ -79,12 +73,9 @@ def add_business_commit(request):
 @xframe_options_sameorigin
 def get_business_by_id(request,business_id):
     business = Business.objects.filter(id=business_id)
-    leader_id = Business.objects.filter(id=business_id).values("leader").first()['leader']
-    leader_name = User.objects.filter(id=leader_id).values("username").first()
-    print(leader_name)
     leader_all = User.objects.all()
-    content = {'data': business , "leader_name": leader_name ,"leader_all":leader_all}
-    return  render(request,'devops/business/update_business.html',content)
+    content = {'data': business , "leader_all":leader_all}
+    return render(request,'devops/business/update_business.html', content)
 
 # 修改业务保存
 @check_login
@@ -99,10 +90,8 @@ def update_business(request):
     local_ip = request.POST['local_ip']
     port = request.POST['port']
     leader = request.POST['leader']
-    leader_id = User.objects.get(username = leader)
-    print(leader_id.username)
-    Business.objects.filter(id=id).update(business=business,project=project,application=application
-                                          ,deploy_dir=deploy_dir,log_dir=log_dir,local_ip=local_ip,port=port,leader=leader_id)
+    Business.objects.filter(id=id).update(business=business, project=project, application=application,
+                                          deploy_dir=deploy_dir, log_dir=log_dir, local_ip=local_ip, port=port, leader=leader)
     return redirect('/devops/business')
 
 #查询业务

@@ -97,6 +97,9 @@ DATABASES = {
         'PASSWORD': 'mofang123',
         'HOST': '192.168.1.100',
         'PORT': '3306',
+        'OPTIONS': {
+            "init_command": "SET foreign_key_checks = 0;",
+        }
     }
 }
 

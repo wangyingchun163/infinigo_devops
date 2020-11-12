@@ -12,6 +12,7 @@ from django.conf import settings    # 获取 settings.py 里边配置的信息
 import os
 
 from ..models.models_domain import Domain
+from ..models.models_user import User
 from .views_user import *
 
 @check_login

@@ -33,11 +33,6 @@
                     日志路径：<input type="text" name="log_dir" id="log_dir" placeholder="日志路径" class="layui-input"/>
                     <hr class="layui-bg-green">
 
-                    <!--
-                    业务管理员：<input type="text" name="leader" id="leader" placeholder="leader" class="layui-input"/>
-                    <hr class="layui-bg-green">
-                    -->
-
                     业务管理员：<select name="leader"  id="leader" lay-verify="required"  onchange="" lay-search="" class="layui-select-none" style="height: 35px">
                       <option value="">请选择管理员</option>
                         {%for leader in leader_list%}

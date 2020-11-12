@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from django.views.generic.base import RedirectView
-from .views import views_business , views_device , views_user ,views_domain ,views_supplier ,views_other
+from .views import views_user, views_domain, views_supplier, views_other, views_business, views_device
 app_name = 'devops'
 urlpatterns = [
     # 根路径则跳转到登录页
@@ -23,9 +23,7 @@ urlpatterns = [
     path('add_device/', views_device.add_device),  # device
     path('add_device_commit/', views_device.add_device_commit),  # device
 
-    #path('all_device',views_device.all_device), # list device
-
-    path('get_device/<int:device_id>/', views_device.get_device_by_id),   # 根据 id 查找操作的 dao
+    path('get_device/<int:device_id>/', views_device.get_device_by_id),   # 根据 id 查找操作的 ao
     path('update_device/', views_device.update_device),  # 修改操作的 dao
 
     path('search_device/',views_device.search_device),  # 搜索操作的 dao
