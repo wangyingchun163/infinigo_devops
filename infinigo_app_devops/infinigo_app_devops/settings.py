@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cmdb',
-    'myDjangoApp',
     'devops',
 ]
 
@@ -98,7 +97,9 @@ DATABASES = {
         'HOST': '192.168.1.100',
         'PORT': '3306',
         'OPTIONS': {
-            "init_command": "SET foreign_key_checks = 0;",
+            # "init_command": "SET foreign_key_checks = 0;",
+            'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
+            "charset": "utf8mb4"
         }
     }
 }

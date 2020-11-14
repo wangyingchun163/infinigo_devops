@@ -23,6 +23,10 @@ def business(request):
         # username = userobj.username
         if request.method == 'GET':
             data = Business.objects.all()
+
+            # print("*" * 100)
+            # print(data)
+            # print("*" * 100)
             content = {'data': data}
             return render(request, 'devops/business/business.html', content)
         else:
@@ -51,14 +55,15 @@ def add_business_commit(request):
     business = request.POST['business']
     project = request.POST['project']
     application = request.POST['application']
-    leader_id = request.POST['leader']
+    leader = request.POST['leader']
     deploy_dir = request.POST['deploy_dir']
     log_dir = request.POST['log_dir']
     local_ip = request.POST['local_ip']
     port = request.POST['port']
 
-    leader_objects = User.objects.get(id=leader_id).id
-    Business.objects.create(leader_id=leader_objects,
+    leader_objects = User.objects.get(id=leader)
+    print('leader_objects is {}'.format(leader_objects))
+    Business.objects.create(leader=leader_objects,
                             business=business,
                             project=project,
                             application=application,
@@ -75,6 +80,8 @@ def get_business_by_id(request,business_id):
     business = Business.objects.filter(id=business_id)
     leader_all = User.objects.all()
     content = {'data': business , "leader_all":leader_all}
+    # content = {'data': business}
+    print(content)
     return render(request,'devops/business/update_business.html', content)
 
 # 修改业务保存

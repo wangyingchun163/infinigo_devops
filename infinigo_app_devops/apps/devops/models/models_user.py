@@ -9,5 +9,5 @@ class User(models.Model):
 
     def __str__(self):
         # return '[username={}]'.format(self.username)
-        # return self.username
-        return '[id={},username={}]'.format(self.id, self.username)
+        return self.username
+        # return '[id={},username={}]'.format(self.id, self.username)

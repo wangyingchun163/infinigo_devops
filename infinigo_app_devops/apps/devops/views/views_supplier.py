@@ -39,8 +39,8 @@ def all_supplier(request):
 @check_login
 @xframe_options_sameorigin
 def add_supplier(request):
-    leader_list = User.objects.all()
-    content = {'leader_list': leader_list}
+    leader_id_list = User.objects.all()
+    content = {'leader_id_list': leader_id_list}
     return render(request, 'devops/supplier/add_supplier.html', content)
 
 # 添加业务提交保存
@@ -75,11 +75,11 @@ def add_supplier_commit(request):
 @xframe_options_sameorigin
 def get_supplier_by_id(request,supplier_id):
     supplier = Supplier.objects.filter(id=supplier_id)
-    #leader_id = supplier.objects.filter(id=supplier_id).values("leader").first()['leader']
-    #leader_name = User.objects.filter(id=leader_id).values("username").first()
-    #print(leader_name)
-    #leader_all = User.objects.all()
-    #content = {'data': supplier , "leader_name": leader_name ,"leader_all":leader_all}
+    #leader_id = supplier.objects.filter(id=supplier_id).values("leader_id").first()['leader_id']
+    #leader_id_name = User.objects.filter(id=leader_id).values("username").first()
+    #print(leader_id_name)
+    #leader_id_all = User.objects.all()
+    #content = {'data': supplier , "leader_id_name": leader_id_name ,"leader_id_all":leader_id_all}
     content = {'data': supplier}
     return render(request,'devops/supplier/update_supplier.html',content)
 

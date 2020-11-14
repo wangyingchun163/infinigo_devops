@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from django.views.generic.base import RedirectView
-from .views import views_user, views_domain, views_supplier, views_other, views_business, views_device
+from .views import views_user, views_domain, views_supplier, views_other, views_business, views_device, view_person
 app_name = 'devops'
 urlpatterns = [
     # 根路径则跳转到登录页
@@ -68,6 +68,9 @@ urlpatterns = [
     path('search_supplier/', views_supplier.search_supplier),  # 搜索操作的 dao
 
     path('delete_supplier/<int:supplier_id>', views_supplier.delete_supplier),  # 删除操作的 dao
+
+    # person test
+    path('person/', view_person.person),  # 供应商
 
 
 

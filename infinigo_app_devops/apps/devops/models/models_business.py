@@ -11,7 +11,7 @@ class Business(models.Model):
     log_dir = models.CharField(max_length=100)   #日志路径
     local_ip = models.CharField(max_length=18)  #部署IP
     port = models.IntegerField()  #端口号
-    leader = models.OneToOneField(User, to_field="username", on_delete=models.CASCADE)
+    leader = models.OneToOneField(User, to_field="id", on_delete=models.DO_NOTHING)
 
     def __str__(self):
-        return '[id={}, business={}, project={}, application={}, leader={}, deploy_dir={}, log_dir={}, local_ip={}, port={}]'.format(self.id, self.business, self.project, self.application, self.leader_id, self.deploy_dir, self.log_dir,self.local_ip , self.port)
+        return '[id={}, business={}, project={}, application={}, leader={}, deploy_dir={}, log_dir={}, local_ip={}, port={}]'.format(self.id, self.business, self.project, self.application, self.leader, self.deploy_dir, self.log_dir,self.local_ip , self.port)

@@ -41,8 +41,8 @@ def all_domain(request):
 @check_login
 @xframe_options_sameorigin
 def add_domain(request):
-    leader_list = User.objects.all()
-    content = {'leader_list': leader_list}
+    leader_id_list = User.objects.all()
+    content = {'leader_id_list': leader_id_list}
     return render(request, 'devops/domain/add_domain.html' , content)
 
 # 添加业务提交保存
@@ -68,11 +68,11 @@ def add_domain_commit(request):
 @xframe_options_sameorigin
 def get_domain_by_id(request,domain_id):
     domain = Domain.objects.filter(id=domain_id)
-    #leader_id = Domain.objects.filter(id=domain_id).values("leader").first()['leader']
-    #leader_name = User.objects.filter(id=leader_id).values("username").first()
-    #print(leader_name)
-    #leader_all = User.objects.all()
-    #content = {'data': domain , "leader_name": leader_name ,"leader_all":leader_all}
+    #leader_id = Domain.objects.filter(id=domain_id).values("leader_id").first()['leader_id']
+    #leader_id_name = User.objects.filter(id=leader_id).values("username").first()
+    #print(leader_id_name)
+    #leader_id_all = User.objects.all()
+    #content = {'data': domain , "leader_id_name": leader_id_name ,"leader_id_all":leader_id_all}
     content = {'data': domain}
     return  render(request,'devops/domain/update_domain.html',content)
 

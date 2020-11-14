@@ -25,6 +25,7 @@ def device(request):
         # username = userobj.username
         data = Device.objects.all()
         content = {'data': data}
+        print(content)
         return render(request, 'devops/device/device.html', content)
     else:
         return HttpResponse('only get!')
@@ -58,7 +59,7 @@ def add_device_commit(request):
     user = request.POST['user']
     password = request.POST['password']
     t_image = request.FILES['t_image']
-    leader_id = request.POST['leader']
+    leader = request.POST['leader']
 
     fname = os.path.join(settings.MEDIA_ROOT, t_image.name)
     with open(fname, 'wb') as pic:
@@ -71,8 +72,8 @@ def add_device_commit(request):
     device_t_image = t_image
     device_t_image = os.path.join("/static/media/", t_image.name)
 
-    leader_objects = User.objects.get(id=leader_id).id
-    Device.objects.create(leader_id=leader_objects,
+    leader_objects = User.objects.get(id=leader)
+    Device.objects.create(leader=leader_objects,
                             name=name,
                             local_ip=local_ip,
                             public_ip=public_ip,
