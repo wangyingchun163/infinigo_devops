@@ -23,7 +23,7 @@
 
                     project：<select name="project"  id="project" lay-verify="required"  onchange="" lay-search="" class="layui-select-none" style="height: 35px ;margin-right:50px" >
                       <option value="">请选择项目</option>
-                        {%for project in project_list%}
+                        {%for project in business_list%}
                             <tr>
                                 <option value={{project.id}}>{{project.project}}</option>
                             </tr>
@@ -32,7 +32,7 @@
 
                     application：<select name="application"  id="application" lay-verify="required"  onchange="" lay-search="" class="layui-select-none" style="height: 35px ;margin-right:50px" >
                       <option value="">请选择项目</option>
-                        {%for application in application_list%}
+                        {%for application in business_list%}
                             <tr>
                                 <option value={{application.id}}>{{application.application}}</option>
                             </tr>

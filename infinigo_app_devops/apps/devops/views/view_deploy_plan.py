@@ -45,19 +45,19 @@ def all_deploy(request):
 @check_login
 @xframe_options_sameorigin
 def add_deploy(request):
-    leader_list = User.objects.all()
-    device_list = Device.objects.all()
-    business_list = Business.objects.all()
-    content = {'leader_list': leader_list, 'device_list': device_list, 'business_list': business_list}
-    return render(request, 'devops/deploy/add_deploy.html', content)
+    # leader_list = User.objects.all()
+    # device_list = Device.objects.all()
+    # business_list = Business.objects.all()
+    # content = {'leader_list': leader_list, 'device_list': device_list, 'business_list': business_list}
+    # return render(request, 'devops/deploy/add_deploy.html', content)
 
-    # leader_list = User.objects.values('username').distinct().order_by('username')
-    # device_list = Device.objects.filter(local_ip__isnull=False).distinct().order_by('local_ip')
-    # business_list = Business.objects.values('business').distinct().order_by('business')
-    # project_list = Business.objects.values('project').distinct().order_by('project')
-    # application_list = Business.objects.values('application').distinct().order_by('application')
-    # content = {'leader_list': leader_list, 'device_list': device_list, 'business_list': business_list, 'project_list': project_list, 'application_list': application_list}
-    #
+    leader_list = User.objects.filter(username__isnull=False).distinct().order_by('username')
+    device_list = Device.objects.filter(local_ip__isnull=False).distinct().order_by('local_ip')
+    business_list = Business.objects.filter(business__isnull=False).distinct().order_by('business')
+    project_list = Business.objects.filter(project__isnull=False).distinct().order_by('project')
+    application_list = Business.objects.filter(application__isnull=False).distinct().order_by('application')
+    content = {'leader_list': leader_list, 'device_list': device_list, 'business_list': business_list, 'project_list': project_list, 'application_list': application_list}
+
     # print("==="*100)
     # print("leader_list is {}".format(leader_list))
     # print("device_list is {}".format(device_list))
@@ -65,13 +65,14 @@ def add_deploy(request):
     # print("project_list is {}".format(project_list))
     # print("application_list is {}".format(application_list))
     # print("===" * 100)
-    # print(content)
-    # return render(request, 'devops/deploy/add_deploy.html', content)
+    print(content)
+    return render(request, 'devops/deploy/add_deploy.html', content)
 
 # 添加业务提交保存
 @check_login
 @xframe_options_sameorigin
 def add_deploy_commit(request):
+    print(request.POST)
     business = request.POST['business']
     project = request.POST['project']
     application = request.POST['application']
