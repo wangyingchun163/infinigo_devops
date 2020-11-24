@@ -1,0 +1,96 @@
+{% extends "devops/base.html" %}
+{% block content %}
+    <div class="layui-container">
+        {# 查询部署信息 #}
+        <form action="/devops/search_deploy" method="get">
+            项目名称：<input type="text" style="width:200px; height:30px;" placeholder="部署" name="project" id="project">
+            <input type="submit" class="layui-btn" value="搜索">
+        </form>
+
+        {# 添加业务模块 #}
+        <a href="/devops/add_deploy" class="layui-btn layui-btn-warm">
+            <i class="layui-icon">&#xe654;</i> 添加
+        </a>
+
+        {# 显示所有业务模块 #}
+        <table class="layui-table" style="margin:0 ;width:120%; padding:0px;">
+            <thead>
+              <tr>
+                  <th style="width:1%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">id</th>
+                  <th style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">business</th>
+                  <th style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">project</th>
+                  <th style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">application</th>
+                  <!--
+                  <th style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">main_version</th>
+                  <th style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">second_version</th>
+                  <th style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">third_version</th>
+                  -->
+                  <th style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">dep_version</th>
+                  <th style="width:6%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">git_url</th>
+                  <th style="width:6%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">git_version</th>
+                  <th style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">deploy_time</th>
+                  <th style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">device</th>
+                  <th style="width:4%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">UAT_status</th>
+                  <th style="width:4%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">PREIDC_status</th>
+                  <th style="width:4%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">IDC_status</th>
+                  <th style="width:4%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">exec_status</th>
+                  <th style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">leader</th>
+                  <th style="width:2%">发布回退</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for deploy in data%}
+                  <tr>
+                      <td  style="width:1%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">{{deploy.id}}</td>
+                      <td  style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">{{deploy.business.business}}</td>
+                      <td  style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">{{deploy.project.project}}</td>
+                      <td  style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">{{deploy.application.application}}</td>
+                      <!--
+                      <td  style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">{{deploy.main_version}}</td>
+                      <td  style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">{{deploy.second_version}}</td>
+                      <td  style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">{{deploy.third_version}}</td>
+                      -->
+                      <td  style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">{{deploy.main_version}}.{{deploy.second_version}}.{{deploy.third_version}}</td>
+                      <td  style="width:6%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">{{deploy.git_url}}</td>
+                      <td  style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">{{deploy.git_version}}</td>
+                      <td  style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">{{deploy.deploy_time}}</td>
+                      <td  style="width:4%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">{{deploy.device.local_ip}}</td>
+                      <td  style="width:4%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">{{deploy.UAT_status}}</td>
+                      <td  style="width:4%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">{{deploy.PREIDC_status}}</td>
+                      <td  style="width:4%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">{{deploy.IDC_status}}</td>
+                      <td  style="width:4%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">{{deploy.exec_status}}</td>
+                      <td  style="width:5%;word-break:break-all;word-wrap : break-word ;verflow:hidden;">{{deploy.leader}}</td>
+                      <td  style="width:2%">
+                          {# 发布 #}
+                          <a href="/devops/to_deploy/{{ deploy.id }}/" class="layui-btn layui-btn-normal">
+                              <i class="layui-icon">&#xe642;</i>发布
+                          </a>
+
+                          {# 回退 #}
+                          <a href="/devops/rollback_deploy/{{ deploy.id }}/" class="layui-btn layui-btn-danger">
+                              <i class="layui-icon">&#xe640;</i>回退
+                          </a>
+
+                          {# 修改 #}
+                          <a href="/devops/get_business/{{ deploy.id }}/" class="layui-btn layui-btn-normal">
+                              <i class="layui-icon">&#xe642;</i>修改
+                          </a>
+
+                          {# 删除 #}
+                          <!--
+                          <a href="/devops/delete_business/{{ deploy.id }}" class="layui-btn layui-btn-danger">
+                              <i class="layui-icon">&#xe640;</i>删除
+                          </a>
+                          -->
+                      </td>
+                  </tr>
+              {%endfor%}
+            </tbody>
+        </table>
+
+        {# 添加业务模块 #}
+        <a href="/devops/add_deploy" class="layui-btn layui-btn-warm">
+            <i class="layui-icon">&#xe654;</i> 添加
+        </a>
+    </div>
+{% endblock %}

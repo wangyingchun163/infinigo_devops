@@ -24,8 +24,8 @@ from django.views.decorators.clickjacking import xframe_options_sameorigin
 from django.conf import settings    # 获取 settings.py 里边配置的信息
 import os
 
-from ..models.models_region import Province, Person, City
-
-def person(request):
-    person1 = Person.objects.select_related().all()
-    print(person1)
+# from ..models.models_region import Province, Person, City
+#
+# def person(request):
+#     person1 = Person.objects.select_related().all()
+#     print(person1)

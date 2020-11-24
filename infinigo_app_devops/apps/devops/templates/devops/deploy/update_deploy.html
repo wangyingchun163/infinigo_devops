@@ -1,0 +1,49 @@
+{% extends "devops/base.html" %}
+{% block content %}
+    <div class="layui-container">
+        <div class="layui-row">
+        {%for business in data%}
+            <div class="layui-col-md5">
+                <form action="/devops/update_business/" method="post" enctype="multipart/form-data"/>
+                    {% csrf_token %}
+                    id<input type="text" name="id" id="id" placeholder="id" class="layui-input" value="{{ business.id}}" />
+                    <hr class="layui-bg-green">
+
+                    business<input type="text" name="business" id="business" placeholder="business" class="layui-input" value="{{ business.business }}"/>
+                    <hr class="layui-bg-green">
+
+                    project<input type="text" name="project" id="project" placeholder="project" class="layui-input" value="{{ business.project }}"/>
+                    <hr class="layui-bg-green">
+
+                    application<input type="text" name="application" id="application" placeholder="application" class="layui-input" value="{{ business.application }}"/>
+                    <hr class="layui-bg-green">
+
+                    deploy_dir<input type="text" name="deploy_dir" id="deploy_dir" placeholder="deploy_dir" class="layui-input" value="{{ business.deploy_dir }}"/>
+                    <hr class="layui-bg-green">
+
+                    log_dir<input type="text" name="log_dir" id="log_dir" placeholder="log_dir" class="layui-input" value="{{ business.log_dir }}"/>
+                    <hr class="layui-bg-green">
+
+                    local_ip<input type="text" name="local_ip" id="local_ip" placeholder="local_ip" class="layui-input" value="{{ business.local_ip }}"/>
+                    <hr class="layui-bg-green">
+
+                    port<input type="text" name="port" id="port" placeholder="port" class="layui-input" value="{{ business.port }}"/>
+                    <hr class="layui-bg-green">
+
+                    业务管理员：<select name="leader"  id="leader" lay-verify="required"   onchange="" lay-search="" class="layui-select-none" style="height: 35px">
+                        {%for leader in leader_all%}
+                            <tr>
+                                <option value={{leader.id}}  selected="selected">{{leader.username}}</option>
+                            </tr>
+                        {%endfor%}
+                    </select>
+
+                    <hr class="layui-bg-green">
+
+                    <input type="submit" value="修改" class="layui-btn"/>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

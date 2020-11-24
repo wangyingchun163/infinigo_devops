@@ -1,0 +1,80 @@
+{% extends "devops/base.html" %}
+{% block content %}
+    <div class="layui-container" >
+        <blockquote class="layui-elem-quote">
+            <h1>add deploy_plan</h1>
+        </blockquote>
+
+        <div class="layui-row" style="margin:0 ;width:100%; padding:0px;">
+
+            <div class="layui-col-md5">
+                <form action="/devops/add_deploy_commit/" method="POST" enctype="multipart/form-data"/>
+                    {% csrf_token %}
+                    <hr class="layui-bg-green ">
+
+                    business：<select name="business" id="business" lay-verify="required"  onchange="" lay-search="" class="layui-select-none" style="height: 35px ;margin-right:50px" >
+                      <option value="">请选择业务线</option>
+                        {%for business in business_list%}
+                            <tr>
+                                <option value={{business.id}}>{{business.business}}</option>
+                            </tr>
+                        {%endfor%}
+                    </select>
+
+                    project：<select name="project"  id="project" lay-verify="required"  onchange="" lay-search="" class="layui-select-none" style="height: 35px ;margin-right:50px" >
+                      <option value="">请选择项目</option>
+                        {%for project in project_list%}
+                            <tr>
+                                <option value={{project.id}}>{{project.project}}</option>
+                            </tr>
+                        {%endfor%}
+                    </select>
+
+                    application：<select name="application"  id="application" lay-verify="required"  onchange="" lay-search="" class="layui-select-none" style="height: 35px ;margin-right:50px" >
+                      <option value="">请选择项目</option>
+                        {%for application in application_list%}
+                            <tr>
+                                <option value={{application.id}}>{{application.application}}</option>
+                            </tr>
+                        {%endfor%}
+                    </select>
+                    <hr class="layui-bg-green">
+
+                    main_version: <input type="text" name="main_version" id="main_version" placeholder="主版本" class="input" style="height: 35px; width:110px ;margin-right:50px"/>
+
+                    second_version: <input type="text" name="second_version" id="second_version" placeholder="次版本" class="input" style="height: 35px; width:105px ;margin-right:50px"/>
+
+                    third_version: <input type="text" name="third_version" id="third_version" placeholder="修复版本" class="input" style="height: 35px; width:135px ;margin-right:50px"/>
+                    <hr class="layui-bg-green">
+
+                    git_url：<input type="text" name="git_url" id="git_url" placeholder="git url" class="input" style="height: 35px; width:550px ;margin-right:50px"/>
+
+                    git_version：<input type="text" name="git_version" id="git_version" placeholder="git commit_id " class="input" style="height: 35px; width:300px ;margin-right:50px"/>
+                    <hr class="layui-bg-green">
+
+                    device：<select name="device"  id="device"  lay-verify="required"  onchange="" lay-search="" class="layui-select-none" style="height: 35px ;width:800px ;margin-right:50px" >
+                      <option value="">请选择设备</option>
+                        {%for device in device_list%}
+                            <tr>
+                                <option value={{device.id}}>{{device.local_ip}}</option>
+                            </tr>
+                        {%endfor%}
+                    </select>
+                    <hr class="layui-bg-green">
+
+                    leader：<select name="leader"  id="leader" lay-verify="required"  onchange="" lay-search="" class="layui-select-none" style="height: 35px">
+                      <option value="">请选择管理员</option>
+                        {%for leader in leader_list%}
+                            <tr>
+                                <option value={{leader.id}}>{{leader.username}}</option>
+                            </tr>
+                        {%endfor%}
+                    </select>
+
+                    <hr class="layui-bg-green">
+                    <input type="submit" value="添加" class="layui-btn"/>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

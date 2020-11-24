@@ -1,7 +1,7 @@
 from django.urls import path
-from . import views
 from django.views.generic.base import RedirectView
-from .views import views_user, views_domain, views_supplier, views_other, views_business, views_device, view_person
+from .views import views_user, views_domain, views_supplier, views_other, views_business, views_device, view_deploy_plan
+from .views import view_person
 app_name = 'devops'
 urlpatterns = [
     # 根路径则跳转到登录页
@@ -69,8 +69,21 @@ urlpatterns = [
 
     path('delete_supplier/<int:supplier_id>', views_supplier.delete_supplier),  # 删除操作的 dao
 
+    # 发布任务及发布日志管理
+    path('deploy/', view_deploy_plan.deploy),  # 显示所有发布记录
+
+    path('add_deploy/', view_deploy_plan.add_deploy),  # 创建发布计划
+    path('add_deploy_commit/', view_deploy_plan.add_deploy_commit),  # 供应商
+    #
+    # path('get_deploy/<int:deploy_id>/', view_deploy_plan.update_deploy_by_id),  # 根据 id 查找操作的 dao
+    # path('update_deploy/', view_deploy_plan.update_deploy),  # 修改操作的 dao
+    #
+    # path('search_deploy/', view_deploy_plan.search_deploy),  # 搜索操作的 dao
+    #
+    # path('delete_deploy/<int:deploy_id>', view_deploy_plan.delete_deploy),  # 删除操作的 dao
+
     # person test
-    path('person/', view_person.person),  # 供应商
+    # path('person/', view_person.person),
 
 
 
